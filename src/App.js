@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import Links from './components/Links.js';
-import LinkForm from './components/LinkForm';
+import WaiterView from './Templates/waiter';
 
 function App() {
   return (
     <div>
-      <LinkForm/>
-      <Links/>
+      <WaiterView/>
+
     </div>
   );
 }
