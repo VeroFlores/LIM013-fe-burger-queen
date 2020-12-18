@@ -1,44 +1,30 @@
 import React from 'react'
 import { db } from '../firebase'
- const ViewData=()=>{
-    //  const {data,setData}=useState([]);
-    //  console.log(data);
-    //  console.log(setData);
-    //  const addData=(dataObject)=>{
-    //      console.log(dataObject);
-    //  }
-    //  const getData=async ()=>{
-    //      db.collection('customer').onSnapshot((querySnapshot)=>{
-              
-    //           const docs = querySnapshot.map((doc)=>{
-    //             return ({...doc.data(),id:doc.id})
-    //           })
-    //         setData(docs);
-    //         console.log(docs);
-    //      })
-    //  }
-    // console.log(getData);
-    // useEffect(()=>{
-    //     getData();
-    // },[]);
-    const DataClient=(props)=>{
-            return(
+const DataClient=(props)=>{
+    const dat=props.dataClient.dataClient;
+    console.log(dat);
+        return(
                 <div>
                    <div>
-                       <p>{props.name}</p>
-                       <p>{props.table}</p>
+                       <p>{dat.client}</p>
+                       <p>{}</p>
                        <button>Editar</button>
                    </div>
                </div>
-       
-            )
-        
-    }
+        )
+                
+}
+const TotalOrder =(props)=> {
+    const data =props;
+    console.log(props);
     return (
-        <div>
-            <DataClient/>
+        <div className="container">
+
+            <DataClient dataClient={data}/>
         </div>
     )
+  
+}
 
- }
-export default ViewData
+
+export default TotalOrder

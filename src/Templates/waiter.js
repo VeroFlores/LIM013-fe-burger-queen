@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import SaveRegister from '../components/register'
-import ViewData from '../components/register-view'
+import TotalOrder from '../components/register-view'
 
 const WaiterView = () => {
     const initialSetData={
@@ -19,13 +19,11 @@ const WaiterView = () => {
          setData({...data,client:dataObject.client,table:dataObject.table})
     }
     console.log(data);
-    const watchData=()=>{
-return data
-    }
+
     return (
         <div>
-            <SaveRegister addData={addData}  />
-            <ViewData watchData={data}/>
+            <SaveRegister addData={addData} />
+            <TotalOrder dataClient={data}/>
         </div>
     )
 }
