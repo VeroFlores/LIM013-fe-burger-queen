@@ -1,13 +1,13 @@
 import React from 'react'
 import { db } from '../firebase'
 const DataClient=(props)=>{
-    const dat=props.dataClient.dataClient;
-    console.log(dat);
+    const getObject=props.infoClient.infoClient;
+    console.log(getObject);
         return(
                 <div>
                    <div>
-                       <p>{dat.client}</p>
-                       <p>{}</p>
+                       <p>{getObject.client}</p>
+                       <p>{getObject.table}</p>
                        <button>Editar</button>
                    </div>
                </div>
@@ -20,7 +20,7 @@ const TotalOrder =(props)=> {
     return (
         <div className="container">
 
-            <DataClient dataClient={data}/>
+            <DataClient infoClient={data}/>
         </div>
     )
   

@@ -15,15 +15,15 @@ const WaiterView = () => {
     // }
     // );
 
-    const addData=(dataObject)=>{
-         setData({...data,client:dataObject.client,table:dataObject.table})
+    const addData=(obj)=>{
+         setData({...data,client:obj.client,table:obj.table})
     }
     console.log(data);
 
     return (
         <div>
             <SaveRegister addData={addData} />
-            <TotalOrder dataClient={data}/>
+            <TotalOrder infoClient={data}/>
         </div>
     )
 }
