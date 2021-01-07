@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { KitchenOrder } from './kitchenOrder';
+import { Clock } from './clock';
 import { db } from '../firebase';
-
+import moment from 'moment';
 export const Kitchen = (props) => {
 const [showOrder, setShowOrder] = useState([]);
+const [date, setDate] = useState([]);
   useEffect(()=>{
-    db.collection('orders').onSnapshot((doc) => {
+    db.collection('ordenes').onSnapshot((doc) => {
       const arrayMenu =[]
       doc.forEach((el)=>{
         arrayMenu.push({
@@ -15,18 +16,27 @@ const [showOrder, setShowOrder] = useState([]);
       })
       setShowOrder(arrayMenu)
     })
-  }, []);
-
+  }, 
+  []);
+  const updateData = (idDoc) => {
+    db.collection('ordenes').doc(idDoc).update({
+      endTime:new Date().toLocaleTimeString(),
+      status:'Done',
+    }).then(()=>{console.log('updated')})
+  }
   return (
     <div>
       {showOrder.map((order,index)=>
         <ul key={order.id}>
           <p>Pedido Nro.{index+1}</p>
           <p>Status: {order.status}</p>
-          <p>Tiempo: {order.time}</p>
+          <p>Hora de Pedido:{order.time}</p>
+          <p>Hora de Servido:{order.endTime}</p>
+          <p>Demora:{moment(order.endTime,"hh:mm:ss").diff(moment(order.time,"hh:mm:ss"),'minutes')} minutes</p>
           <p>Detalle de Pedido</p>
           {order.items.map((element,index)=>
           <li key={'o'+index}>{element}</li>)}
+          <button onClick={()=>{updateData(order.id)}}>{order.status}</button>
         </ul>
       )}
     </div>

@@ -16,8 +16,9 @@ export const Restaurant = () => {
       return element['description'];
     });
 
-    db.collection('orders').doc().set({
-      time:new Date().toLocaleString(),
+    db.collection('ordenes').doc().set({
+      time:new Date().toLocaleTimeString(),
+      endTime:null,
       items:itemsOrder,
       status:'Pending',
     });
