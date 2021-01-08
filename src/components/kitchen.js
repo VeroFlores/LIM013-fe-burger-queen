@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Clock } from './clock';
 import { db } from '../firebase';
 import moment from 'moment';
 export const Kitchen = (props) => {
@@ -31,8 +30,8 @@ const [date, setDate] = useState([]);
           <p>Pedido Nro.{index+1}</p>
           <p>Status: {order.status}</p>
           <p>Hora de Pedido:{order.time}</p>
-          <p>Hora de Servido:{order.endTime}</p>
-          <p>Demora:{moment(order.endTime,"hh:mm:ss").diff(moment(order.time,"hh:mm:ss"),'minutes')} minutes</p>
+          {order.endTime===null?'':<p>Demora:{(moment(order.endTime,"hh:mm:ss").diff(moment(order.time,"hh:mm:ss"),'minutes'))} minutes</p>}
+
           <p>Detalle de Pedido</p>
           {order.items.map((element,index)=>
           <li key={'o'+index}>{element}</li>)}
