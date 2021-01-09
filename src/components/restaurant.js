@@ -1,28 +1,16 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {
   Switch,
   Route,
 } from "react-router-dom";
 
-import { db } from '../firebase';
+
 
 import { Kitchen } from './kitchen'
 import { OrderView } from './orderView';
 import {Menu} from './navbar';
 
 export const Restaurant = () => {
-  const addOrder = (order) => {
-    const itemsOrder = order.map((element) => {
-      return element['description'];
-    });
-
-    db.collection('ordenes').doc().set({
-      time:new Date().toLocaleTimeString(),
-      endTime:null,
-      items:itemsOrder,
-      status:'Pending',
-    });
-  };
 
   return (
     <main>
@@ -38,7 +26,7 @@ export const Restaurant = () => {
           <Menu />
         </Route>
         <Route path="/waiter">
-          <OrderView addOrder={addOrder} />
+          <OrderView />
         </Route>
         <Route path="/kitchen">
           <Kitchen />

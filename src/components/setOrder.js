@@ -39,7 +39,6 @@ export const SetOrder = (props) => {
       <ul className='display-list-product'>
         {menu.map((item, index) => <Product key = {'m'+ index} itemProduct = {item}  selectProduct={selectProduct} />)}
       </ul>
-
       <ul className="display-list-order">
         <div>
           {order.map((item, index) => <OrderList key = {'o'+ index} itemProduct = {item} onDelete={()=>onDeleteOrderList(index)}/>)}

@@ -3,7 +3,6 @@ import { db } from '../firebase';
 import moment from 'moment';
 export const Kitchen = (props) => {
 const [showOrder, setShowOrder] = useState([]);
-const [date, setDate] = useState([]);
   useEffect(()=>{
     db.collection('ordenes').onSnapshot((doc) => {
       const arrayMenu =[]

@@ -1,26 +1,36 @@
 import React, { useState } from 'react';
 import { InfoClient } from './infoClient';
 import { SetOrder } from './setOrder';
+import { db } from '../firebase';
 import '../styles/orderView.css'
 
-export const OrderView = (props) => {
-
-  const [typeFood, setTypeFood] = useState('desayuno');
-
+export const OrderView = () => {
   const options = ["Select a table", "A1", "A2", "A3"];
-
+  const [typeFood, setTypeFood] = useState('desayuno');
   const initialStateValues = {
     client: '',
     table: '',
   };
-
   const [values, setValues] = useState(initialStateValues);
- 
+
   const handleInputChange = (e) => {
     const {name, value} = e.target;
     setValues({...values, [name]: value});
   }
+  const addOrder = (order) => {
+    const itemsOrder = order.map((element) => {
+      return element['description'];
+    });
 
+    db.collection('ordenes').doc().set({
+      client:values.client,
+      table:values.table,
+      time:new Date().toLocaleTimeString(),
+      endTime:null,
+      items:itemsOrder,
+      status:'Pending',
+    });
+  };
   return(
     <section className="order-view-section">
       <div className="input-section">
@@ -40,7 +50,7 @@ export const OrderView = (props) => {
       </div>
 
       <div className='info-section'>
-        <InfoClient infoClient={values}/>
+      <InfoClient infoClient={values}/>
       </div>
 
       <div className='btn-section'>
@@ -48,7 +58,7 @@ export const OrderView = (props) => {
           <button className="button menu" onClick={()=>{setTypeFood('almuerzo y cena')}}>Almuerzo y cena</button>
       </div>
 
-      <SetOrder typeFood={typeFood} addOrder={props.addOrder}/>
+      <SetOrder typeFood={typeFood} addOrder={addOrder} infoClient={values}/>
     </section>
   )
 }
