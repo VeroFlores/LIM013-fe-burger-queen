@@ -50,6 +50,7 @@ export const SetOrder = (props) => {
           onClick={() => {
             props.addOrder(order);
             cleanOrder();
+            props.cleanInput();
           }}
         >Tomar pedido</button>
       </ul>

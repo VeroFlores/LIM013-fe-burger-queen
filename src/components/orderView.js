@@ -10,13 +10,17 @@ export const OrderView = () => {
     table: '',
   };
   const [values, setValues] = useState(initialStateValues);
+  console.log(values);
+  const cleanInput=()=>{
+    setValues(initialStateValues);
+  }
   const handleInput=(data)=>{
     console.log(data);
     const {name, value} = data;
     setValues({...values, [name]: value});
   }
   const [typeFood, setTypeFood] = useState('desayuno');
-  const addOrder = (order,values) => {
+  const addOrder = (order) => {
     const itemsOrder = order.map((element) => {
       return element['description'];
     });
@@ -32,13 +36,13 @@ export const OrderView = () => {
   };
   return(
     <section className="order-view-section">
-      <SetInfo handleInputChange={handleInput}/>
+      
       <div className='btn-section'>
           <button className="button menu" onClick={()=>{setTypeFood('desayuno')}}>Desayuno</button>
           <button className="button menu" onClick={()=>{setTypeFood('almuerzo y cena')}}>Almuerzo y cena</button>
       </div>
-
-      <SetOrder typeFood={typeFood} addOrder={addOrder}/>
+      <SetInfo handleInputChange={handleInput} resetInput={values}/>
+      <SetOrder typeFood={typeFood} addOrder={addOrder} cleanInput={cleanInput}/>
     </section>
   )
 }

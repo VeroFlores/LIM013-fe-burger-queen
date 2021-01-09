@@ -12,12 +12,12 @@ export const SetInfo = (props) => {
       placeholder="Client name"
       name="client"
       onChange={handleChange}
-      // value={values.client}
+      value={props.resetInput.client}
       />
       <select className="select" 
         name="table"
         onChange={handleChange}
-        // value={values.table}
+        value={props.resetInput.client}
         >
         {options.map(option => {
           return <option value={option} key={option} >{option}</option>})}
