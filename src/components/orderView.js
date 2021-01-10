@@ -10,7 +10,7 @@ export const OrderView = () => {
     table: '',
   };
   const [values, setValues] = useState(initialStateValues);
-  console.log(values);
+
   const cleanInput=()=>{
     setValues(initialStateValues);
   }
@@ -20,19 +20,25 @@ export const OrderView = () => {
     setValues({...values, [name]: value});
   }
   const [typeFood, setTypeFood] = useState('desayuno');
+
   const addOrder = (order) => {
     const itemsOrder = order.map((element) => {
       return element['description'];
     });
+    console.log(itemsOrder.length)
+    if(values===initialStateValues || itemsOrder.length===0){
+      alert("Termine de completar para registrar su orden")
+    }else{
+      db.collection('ordenes').doc().set({
+        client:values.client,
+        table:values.table,
+        time:new Date().toLocaleTimeString(),
+        endTime:null,
+        items:itemsOrder,
+        status:'Pending',
+      });
+    }
 
-    db.collection('ordenes').doc().set({
-      client:values.client,
-      table:values.table,
-      time:new Date().toLocaleTimeString(),
-      endTime:null,
-      items:itemsOrder,
-      status:'Pending',
-    });
   };
   return(
     <section className="order-view-section">

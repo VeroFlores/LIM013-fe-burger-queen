@@ -27,6 +27,7 @@ const [showOrder, setShowOrder] = useState([]);
       {showOrder.map((order,index)=>
         <ul key={order.id}>
           <p>Pedido Nro.{index+1}</p>
+          <p>Mesa: {order.table}</p>
           <p>Status: {order.status}</p>
           <p>Hora de Pedido:{order.time}</p>
           {order.endTime===null?'':<p>Demora:{(moment(order.endTime,"hh:mm:ss").diff(moment(order.time,"hh:mm:ss"),'minutes'))} minutes</p>}
