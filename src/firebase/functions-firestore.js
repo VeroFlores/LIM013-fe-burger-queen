@@ -46,13 +46,23 @@ const getData = {
       });
       return ordersDone;
     }),
-
   updateOrder: (idDoc) => {
-    // let newStatus;
-    db.collection('orders').doc(idDoc).update({
-      endTime: new Date().toLocaleTimeString(),
-      status: 'Done',
-    });
+    let newStatus;
+    db.collection('orders').doc(idDoc).get()
+      .then((order) => {
+        if (order.data().status === 'Pending') {
+          newStatus = 'Done';
+        } else if (order.data().status === 'Done') {
+          newStatus = 'Delivered';
+        }
+        return (newStatus, order);
+      })
+      .then((statusValue, order) => {
+        order.update({
+          endTime: new Date().toLocaleTimeString(),
+          status: statusValue,
+        });
+      });
   },
 };
 
