@@ -23,7 +23,7 @@ const Kitchen = (props) => {
 
     return () => { unmounted = true; };
   }, []);
-  console.log(showOrder);
+
   const changeStatus = (id) => {
     getData.updateOrder(id);
     const newDone = [id];
@@ -50,7 +50,9 @@ const Kitchen = (props) => {
                   </Moment>
                 </p>
               )}
-            {/* {order.endTime===null?'':<p className="timer">{(moment(order.endTime,"hh:mm:ss").diff(moment(order.time,"hh:mm:ss"),'seconds'))}s</p>} */}
+            {/* {order.endTime===null?'':<p className="timer">
+            {(moment(order.endTime,"hh:mm:ss").diff(moment(order.time,"hh:mm:ss"),
+            'seconds'))}s</p>} */}
             {/* <p>{order.time}</p> */}
           </div>
           <ul className="items-order">
@@ -102,4 +104,5 @@ const Kitchen = (props) => {
     </section>
   );
 };
+
 export default Kitchen;

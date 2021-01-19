@@ -1,6 +1,7 @@
 import db from './initialization-firebase';
 
 const getData = {
+
   createOrder: (order, data) => {
     db.collection('orders').doc().set({
       client: data.client,
@@ -11,6 +12,7 @@ const getData = {
       status: 'Pending',
     });
   },
+
   getOrder: (callback) => {
     db.collection('orders').where('status', '==', 'Pending').orderBy('time', 'desc').onSnapshot((doc) => {
       const arrayMenu = [];
@@ -24,6 +26,31 @@ const getData = {
     });
   },
 
+  getMenu: (typeFood) => {
+    db.collection('items').where('menu', '==', typeFood).get()
+      .then((queryResults) => {
+        const menu = [];
+        queryResults.forEach((doc) => {
+          menu.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        return menu;
+      });
+  },
+
+  getOrdersDone: () => {
+    db.collection('orders').where('status', '==', 'Done').get()
+      .then((queryResults) => {
+        const ordersDone = [];
+        queryResults.forEach((doc) => {
+          ordersDone.push(doc.data());
+        });
+        return ordersDone;
+      });
+  },
+
   updateOrder: (idDoc) => {
     db.collection('orders').doc(idDoc).update({
       endTime: new Date().toLocaleTimeString(),
@@ -31,14 +58,6 @@ const getData = {
     });
   },
 
-  getOrdersDone: () => db.collection('orders').where('status', '==', 'Done').get()
-    .then((queryResults) => {
-      const ordersDone = [];
-      queryResults.forEach((doc) => {
-        ordersDone.push(doc.data());
-      });
-      return ordersDone;
-    }),
 };
 
 export default getData;
