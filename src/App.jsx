@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Switch,
   Route,
-  BrowserRouter as Router,
 } from 'react-router-dom';
 import Home from './components/Pages/Home';
 import ListOrders from './components/Pages/ListOrders';
@@ -53,7 +52,7 @@ const App = () => {
   };
 
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <div>
       <Navbar nroNotifications={nroNotifications} />
 
       <Switch>
@@ -87,7 +86,7 @@ const App = () => {
           <Home />
         </Route>
       </Switch>
-    </Router>
+    </div>
   );
 };
 export default App;
