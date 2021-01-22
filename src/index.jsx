@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import './firebase/initialization-firebase';
 
 ReactDOM.render(
-  <Router basename={process.env.PUBLIC_URL}>
+  <Router>
     <App />
   </Router>,
   document.getElementById('root'),
