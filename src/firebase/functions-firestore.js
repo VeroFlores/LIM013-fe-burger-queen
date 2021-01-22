@@ -51,15 +51,9 @@ const getData = {
     .then((order) => {
       const timeDiff = order.data().endTime.toDate().getTime()
         - order.data().time.toDate().getTime();
-
-      // 1- Convert to seconds:
       let seconds = Math.floor(timeDiff / 1000);
-
-      // 2- Extract minutes:
       // eslint-disable-next-line radix
-      const minutes = parseInt(seconds / 60); // 60 seconds in 1 minute
-
-      // 3- Keep only seconds not extracted to minutes:
+      const minutes = parseInt(seconds / 60);
       seconds %= 60;
 
       const finalTime = `${minutes}:${seconds}`;
